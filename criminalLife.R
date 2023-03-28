@@ -39,9 +39,10 @@ corcsnew<- cor(new, method ="spearman")
 ggcorrplot(corcsnew,method ="square")
 #are there  factors  that influence a family to become a catholic family?
 
+
+#what factors correlate the most with a catholic family?
 corcsnew[1,]
 sort(corcsnew[1,], decreasing=TRUE)[1:7]
-#what factors correlate the most with a catholic family?
 #EDUCATION OF FATHER - HIGHER SCHOOLING,
 #INTEREST IN EDUCATION BY PARENTS
 #HEAD INJURIES AND FITS OF BOY
@@ -50,10 +51,39 @@ sort(corcsnew[1,], decreasing=TRUE)[1:7]
 #EDUCATION OF MOTHER - HIGHER SCHOOLING
 
 
-
 ggcorrplot(cor(data[,c(55,64,91,85,63,57,66)],method="spearman" ), method="square")
 
+  
+str(new)
 
-ggplot(new)+geom_jitter(aes(x=V55, y=V63), alpha= .5, size=1.2)+
+new$V55 <- as.factor(new$V55)
+new$V63 <- as.factor(new$V63)
+
+ggplot(new)+geom_jitter(aes(x=V55, y=V63),col="green", alpha= .5, size=1.2)+
   theme_tufte()+xlab("catholic family")+ylab("conception unwanted by mother")
+
+ggplot(new)+geom_jitter(aes(x=V55, y=V64), col="blue", alpha=.5, size=1.2)+
+  theme_tufte()+xlab("catholic family")+ylab("EDUCATION OF FATHER - HIGHER SCHOOLING")
+
+ggplot(new, aes(x=V64, y=V55))+geom_boxplot() + geom_jitter(col="red", alpha=.5, size=1.2)+
+  theme_tufte()+xlab("catholic family")+ylab("EDUCATION OF MOTHER - HIGHER SCHOOLING")
+
+
+
+
+
+#what correlates with a discipline of a father?
+corcsnew[5,]
+sort(corcsnew[5,], decreasing=TRUE)[1:7]
+
+ggcorrplot(cor(data[,c(59,62,89,64,106,96,102)],method="spearman" ), method="square")
+
+
+
+
+
+
+
+
+
 
